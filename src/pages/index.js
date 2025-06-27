@@ -22,11 +22,9 @@ const ChatAI = () => {
         setHasHistory(true);
       }
     } catch {
-      /* abaikan */
     }
   }, []);
 
-  // simpan / hapus histori di localStorage
   useEffect(() => {
     if (chatHistory.length) {
       localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
@@ -37,7 +35,6 @@ const ChatAI = () => {
     }
   }, [chatHistory]);
 
-  // ───────────────────────────────────────
   const handleSend = async () => {
     if (!input.trim() || input.length > 500) return;
 
@@ -64,7 +61,6 @@ const ChatAI = () => {
 
   const handleClearHistory = () => setChatHistory([]);
 
-  // ───────────────────────────────────────
   return (
     <div className="bg-[url('/assets/red.png')] bg-cover bg-center flex justify-center pt-32">
       <Head>
