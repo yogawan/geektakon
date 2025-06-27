@@ -1,39 +1,28 @@
 // src/utilities/groq.js
-import { Groq } from 'groq-sdk';
+const SYSTEM_PROMPT = process.env.NEXT_PUBLIC_SYSTEM_PROMPT
+const URL_API = process.env.NEXT_PUBLIC_URL_API
 
-const GROQ_API = process.env.NEXT_PUBLIC_GROQ;
+/**
+ * @param {Array} history - chatHistory lengkap dengan system prompt
+ * @returns {Promise<string>} - balasan AI
+ */
+export const requestToGroqAI = async (history) => {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...history,
+  ];
 
-if (!GROQ_API) {
-  throw new Error("API key for Groq is missing. Check your .env file.");
-}
+  const res = await fetch(URL_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages }),
+  });
 
-const groq = new Groq({
-  apiKey: GROQ_API,
-  dangerouslyAllowBrowser: true
-});
-
-const chatHistory = [
-  {
-    role: "system",
-    content: "Mulai sekarang kamu adalah model yang di buat oleh Yogawan, mahasiswa dari University of Technology Yogyakarta, nama kamu JawirAI"
-  },
-];
-
-export const requestToGroqAI = async (content) => {
-  try {
-    chatHistory.push({ role: 'user', content });
-
-    const reply = await groq.chat.completions.create({
-      messages: chatHistory,
-      model: 'llama3-8b-8192'
-    });
-
-    const responseMessage = reply.choices[0].message.content;
-    chatHistory.push({ role: 'assistant', content: responseMessage });
-
-    return responseMessage;
-  } catch (error) {
-    console.error('Error making request to Groq AI:', error);
-    throw error;
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Network response was not ok: ${res.status} - ${errorText}`);
   }
+  
+  const data = await res.json();
+  return data.reply;
 };

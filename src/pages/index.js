@@ -1,3 +1,4 @@
+// src/pages/index.js
 import React, { useState, useEffect } from "react";
 import { requestToGroqAI } from "@/utilities/groq";
 import ChatHeader from "@/components/ChatHeader";
@@ -15,21 +16,19 @@ const ChatAI = () => {
 
   useEffect(() => {
     try {
-      const savedHistory = JSON.parse(localStorage.getItem("chatHistory"));
-      if (Array.isArray(savedHistory) && savedHistory.length > 0) {
-        setChatHistory(savedHistory);
+      const saved = JSON.parse(localStorage.getItem("chatHistory"));
+      if (Array.isArray(saved) && saved.length) {
+        setChatHistory(saved);
         setHasHistory(true);
-      } else {
-        setHasHistory(false);
       }
     } catch {
-      setChatHistory([]);
-      setHasHistory(false);
+      /* abaikan */
     }
   }, []);
 
+  // simpan / hapus histori di localStorage
   useEffect(() => {
-    if (chatHistory.length > 0) {
+    if (chatHistory.length) {
       localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
       setHasHistory(true);
     } else {
@@ -38,42 +37,46 @@ const ChatAI = () => {
     }
   }, [chatHistory]);
 
+  // ───────────────────────────────────────
   const handleSend = async () => {
     if (!input.trim() || input.length > 500) return;
 
-    const userMessage = { role: "user", content: input };
-    setChatHistory((prev) => [...prev, userMessage]);
+    const userMsg = { role: "user", content: input };
+    const updatedHistory = [...chatHistory, userMsg];
+    setChatHistory(updatedHistory);
     setInput("");
     setIsLoading(true);
 
     try {
-      const aiResponse = await requestToGroqAI(input);
-      const aiMessage = { role: "ai", content: aiResponse };
-      setChatHistory((prev) => [...prev, aiMessage]);
-    } catch {
+      const aiReply = await requestToGroqAI(updatedHistory);
+      const aiMsg = { role: "assistant", content: aiReply };
+      setChatHistory((prev) => [...prev, aiMsg]);
+    } catch (error) {
+      console.error('Error sending message:', error);
       setChatHistory((prev) => [
         ...prev,
-        { role: "ai", content: "Sorry, an error occurred." },
+        { role: "assistant", content: "Sorry, an error occurred." },
       ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleClearHistory = () => {
-    setChatHistory([]);
-  };
+  const handleClearHistory = () => setChatHistory([]);
 
+  // ───────────────────────────────────────
   return (
     <div className="bg-[url('/assets/red.png')] bg-cover bg-center flex justify-center pt-32">
       <Head>
         <title>JawirAI</title>
       </Head>
+
       <div className="w-full sm:w-[720px]">
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          {!hasHistory && (
-            <div>
+
+          {!hasHistory ? (
+            <>
               <ChatHeader />
               <ChatForm
                 input={input}
@@ -81,9 +84,8 @@ const ChatAI = () => {
                 handleSend={handleSend}
                 isLoading={isLoading}
               />
-            </div>
-          )}
-          {hasHistory && (
+            </>
+          ) : (
             <ChatFloating
               input={input}
               setInput={setInput}
@@ -91,6 +93,7 @@ const ChatAI = () => {
               isLoading={isLoading}
             />
           )}
+
           <ChatHistory
             chatHistory={chatHistory}
             isLoading={isLoading}
