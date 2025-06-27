@@ -3,8 +3,8 @@ const SYSTEM_PROMPT = process.env.NEXT_PUBLIC_SYSTEM_PROMPT
 const URL_API = process.env.NEXT_PUBLIC_URL_API
 
 /**
- * @param {Array} history - chatHistory lengkap dengan system prompt
- * @returns {Promise<string>} - balasan AI
+ * @param {Array} history
+ * @returns {Promise<string>}
  */
 export const requestToGroqAI = async (history) => {
   const messages = [

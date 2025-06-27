@@ -1,7 +1,6 @@
 // src/pages/api/models/groq.js
 import { Groq } from 'groq-sdk';
 
-// Inisialisasi SDK sekali di server
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
