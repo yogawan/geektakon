@@ -1,4 +1,4 @@
-// src/pages/api/models/groq.js
+// src/pages/api/chat/models/groq.js
 import { Groq } from 'groq-sdk';
 
 const groq = new Groq({
