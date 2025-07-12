@@ -1,3 +1,4 @@
+// src/pages/api/course/index.js
 export default function handler(req, res) {
   res.status(200).json({
     "Semester 1": [
