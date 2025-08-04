@@ -8,7 +8,7 @@ import ChatFloating from "@/components/ChatFloating";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
 
-const ChatAI = () => {
+const ChatPage = () => {
   const [input, setInput] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,4 +101,4 @@ const ChatAI = () => {
   );
 };
 
-export default ChatAI;
+export default ChatPage;
