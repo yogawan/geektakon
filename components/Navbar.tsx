@@ -1,35 +1,40 @@
 // components/Navbar.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Icon } from "@iconify/react";
+import axios from "axios";
 
-interface NavbarProps {
-  href?: string;
-  label?: string;
+interface Contributor {
+  login: string;
+  html_url: string;
+  avatar_url: string;
+  contributions: number;
 }
 
-interface ChatHistoryItem {
-  label: string;
-  path: string;
-  icon: string;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ href = "/", label = "Default" }) => {
+const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
 
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const ChatHistory: ChatHistoryItem[] = [
-    { label: "Yogawan Aditya Pratama", path: "https://github.com/yogawan", icon: "" },
-    { label: "Miko Dian Rachmadany", path: "https://github.com/mikodian", icon: "" },
-    { label: "Loo Tze Lui", path: "https://github.com/lootzelui", icon: "" },
-  ];
+  useEffect(() => {
+    const fetchContributors = async () => {
+      try {
+        const res = await axios.get<Contributor[]>(
+          "https://api.github.com/repos/yogawan/jawiraiv3.1.1/contributors"
+        );
+        setContributors(res.data);
+      } catch (error) {
+        console.error("Failed to fetch contributors:", error);
+      }
+    };
+
+    fetchContributors();
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full bg-black/5 backdrop-blur border-b border-white/10 z-50">
-      
       <div className="w-full px-4 py-4 flex items-center justify-between">
         <div className="flex justify-between items-center">
           <button
@@ -57,11 +62,10 @@ const Navbar: React.FC<NavbarProps> = ({ href = "/", label = "Default" }) => {
           </button>
         </div>
 
-        {/* <Link href={href} legacyBehavior>
-          <Icon className="text-white" icon={label} width="32" height="32" />
-        </Link> */}
         <div>
-          <p className="p-3 border border-white/15 text-white text-xs rounded-full">ꦗꦮꦶꦫꦆꦌ (JawirAIv1.6.4)</p>
+          <p className="p-3 border border-white/15 text-white text-xs rounded-full">
+            ꦗꦮꦶꦫꦆꦌ (JawirAIv1.6.4)
+          </p>
         </div>
       </div>
 
@@ -85,19 +89,21 @@ const Navbar: React.FC<NavbarProps> = ({ href = "/", label = "Default" }) => {
         </button>
 
         <ul className="space-y-[-12px] text-start">
-          <p className="text-3xl text-white m-3">Contributor</p>
-          {ChatHistory.map((item, index) => (
-            <li
-              key={index}
-              className="flex justify-start items-start text-white dark:text-white transition duration-500"
-            >
-              {/* Perbaikan di sini */}
-              <Link href={item.path} legacyBehavior>
+          <p className="text-3xl text-white m-3">Contributors</p>
+          {contributors.map((contributor) => (
+            <li key={contributor.login} className="flex items-center m-3 space-x-4">
+              <img
+                src={contributor.avatar_url}
+                alt={contributor.login}
+                className="w-8 h-8 rounded-full"
+              />
+              <Link href={contributor.html_url} legacyBehavior>
                 <a
-                  className="font-inter m-3 text-xl font-thin transition-transform transform hover:scale-110"
+                  className="text-white text-lg hover:underline"
+                  target="_blank"
                   onClick={toggleMenu}
                 >
-                  {item.label}
+                  {contributor.login}
                 </a>
               </Link>
             </li>
