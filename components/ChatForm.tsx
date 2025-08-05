@@ -1,7 +1,16 @@
+// components/ChatForm.tsx
 import { Icon } from "@iconify/react";
+import React from "react";
 
-const ChatForm = ({ input, setInput, handleSend, isLoading }) => {
-  const handleKeyDown = (event) => {
+interface ChatFormProps {
+  input: string;
+  setInput: (value: string) => void;
+  handleSend: () => void;
+  isLoading: boolean;
+}
+
+const ChatForm: React.FC<ChatFormProps> = ({ input, setInput, handleSend, isLoading }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (!isLoading) handleSend();
@@ -11,7 +20,6 @@ const ChatForm = ({ input, setInput, handleSend, isLoading }) => {
   return (
     <div className="w-full bg-black/5 backdrop-blur border border-white/15 rounded-3xl">
       <textarea
-        type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}

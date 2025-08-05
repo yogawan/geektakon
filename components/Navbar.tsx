@@ -1,15 +1,27 @@
+// components/Navbar.tsx
 import React, { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 
-const Navbar = ({ href = "/", label = "Default" }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface NavbarProps {
+  href?: string;
+  label?: string;
+}
 
-  const toggleMenu = () => {
+interface ChatHistoryItem {
+  label: string;
+  path: string;
+  icon: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ href = "/", label = "Default" }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const ChatHistory = [
+  const ChatHistory: ChatHistoryItem[] = [
     { label: "Yogawan Aditya Pratama", path: "https://github.com/yogawan", icon: "" },
     { label: "Miko Dian Rachmadany", path: "https://github.com/mikodian", icon: "" },
     { label: "Loo Tze Lui", path: "https://github.com/lootzelui", icon: "" },

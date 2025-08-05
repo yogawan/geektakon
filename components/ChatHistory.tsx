@@ -1,7 +1,19 @@
+// components/ChatHistory.tsx
 import ChatMessage from "@/components/ChatMessage";
 import { Icon } from "@iconify/react";
 
-const ChatHistory = ({ chatHistory, isLoading, handleClearHistory }) => (
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+interface ChatHistoryProps {
+  chatHistory: Message[];
+  isLoading: boolean;
+  handleClearHistory: () => void;
+}
+
+const ChatHistory: React.FC<ChatHistoryProps> = ({ chatHistory, isLoading, handleClearHistory }) => (
   <div className="flex-col pb-64">
     {chatHistory.length === 0 ? (
       <div className="mt-5">

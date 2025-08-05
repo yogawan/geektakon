@@ -1,6 +1,13 @@
+// components/ProtectedImage.tsx
 import React from "react";
 
-const ProtectedImage = ({ src, alt, className }) => (
+interface ProtectedImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+const ProtectedImage: React.FC<ProtectedImageProps> = ({ src, alt, className }) => (
     <div
       className="relative"
       onContextMenu={(e) => e.preventDefault()}

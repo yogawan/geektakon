@@ -1,3 +1,5 @@
+// components/ChatHeader.tsx
+import React from "react";
 import ProtectedImage from "@/components/ProtectedImage";
 
 const ChatHeader = () => (

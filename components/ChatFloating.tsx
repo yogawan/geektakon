@@ -1,7 +1,16 @@
+// components/ChatFloating.tsx
 import { Icon } from "@iconify/react";
+import React from "react";
 
-const ChatFloating = ({ input, setInput, handleSend, isLoading }) => {
-  const handleKeyDown = (event) => {
+interface ChatFloatingProps {
+  input: string;
+  setInput: (value: string) => void;
+  handleSend: () => void;
+  isLoading: boolean;
+}
+
+const ChatFloating: React.FC<ChatFloatingProps> = ({ input, setInput, handleSend, isLoading }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (!isLoading) handleSend();
@@ -11,7 +20,6 @@ const ChatFloating = ({ input, setInput, handleSend, isLoading }) => {
   return (
     <div className="z-50 m-2 fixed bottom-0 left-0 right-0 lg:ml-[360px] lg:mr-[360px] bg-white/5 backdrop-blur border border-white/15 rounded-3xl">
       <textarea
-        type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}

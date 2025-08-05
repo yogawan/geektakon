@@ -1,6 +1,6 @@
-// src/pages/index.js
+// pages/index.ts
 import React, { useState, useEffect } from "react";
-import { requestToGroqAI } from "@/utilities/groq";
+import { requestToGroqAI } from "@/services/groq.service";
 import ChatHeader from "@/components/ChatHeader";
 import ChatForm from "@/components/ChatForm";
 import ChatHistory from "@/components/ChatHistory";
@@ -8,20 +8,29 @@ import ChatFloating from "@/components/ChatFloating";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
 
-const ChatPage = () => {
-  const [input, setInput] = useState("");
-  const [chatHistory, setChatHistory] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasHistory, setHasHistory] = useState(false);
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const ChatAI: React.FC = () => {
+  const [input, setInput] = useState<string>("");
+  const [chatHistory, setChatHistory] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasHistory, setHasHistory] = useState<boolean>(false);
 
   useEffect(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem("chatHistory"));
-      if (Array.isArray(saved) && saved.length) {
-        setChatHistory(saved);
-        setHasHistory(true);
+      const saved = localStorage.getItem("chatHistory");
+      if (saved) {
+        const parsedHistory: Message[] = JSON.parse(saved);
+        if (Array.isArray(parsedHistory) && parsedHistory.length) {
+          setChatHistory(parsedHistory);
+          setHasHistory(true);
+        }
       }
-    } catch {
+    } catch (error) {
+      console.error("Failed to load chat history:", error);
     }
   }, []);
 
@@ -35,10 +44,10 @@ const ChatPage = () => {
     }
   }, [chatHistory]);
 
-  const handleSend = async () => {
+  const handleSend = async (): Promise<void> => {
     if (!input.trim() || input.length > 500) return;
 
-    const userMsg = { role: "user", content: input };
+    const userMsg: Message = { role: "user", content: input };
     const updatedHistory = [...chatHistory, userMsg];
     setChatHistory(updatedHistory);
     setInput("");
@@ -46,7 +55,7 @@ const ChatPage = () => {
 
     try {
       const aiReply = await requestToGroqAI(updatedHistory);
-      const aiMsg = { role: "assistant", content: aiReply };
+      const aiMsg: Message = { role: "assistant", content: aiReply };
       setChatHistory((prev) => [...prev, aiMsg]);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -59,7 +68,7 @@ const ChatPage = () => {
     }
   };
 
-  const handleClearHistory = () => setChatHistory([]);
+  const handleClearHistory = (): void => setChatHistory([]);
 
   return (
     <div className="bg-[url('/assets/red.png')] bg-cover bg-center flex justify-center pt-32">
@@ -101,4 +110,4 @@ const ChatPage = () => {
   );
 };
 
-export default ChatPage;
+export default ChatAI;
