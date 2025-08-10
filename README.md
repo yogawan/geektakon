@@ -1,3 +1,5 @@
+![Creator](creator.png)
+
 # JawirAI
 
 **Jawirai** adalah chatbot berbasis **Next.js** yang memanfaatkan **Groq Cloud API** untuk memberikan respons AI yang cepat dan efisien.  
