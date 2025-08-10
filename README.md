@@ -10,6 +10,9 @@ Setup-nya sederhana, cukup beberapa langkah dan chatbot ini sudah bisa dijalanka
 ### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/yogawan/jawiraiv3.1.1.git
+```
+
+```bash
 cd jawirai
 ```
 
