@@ -12,10 +12,6 @@ Setup-nya sederhana, cukup beberapa langkah dan chatbot ini sudah bisa dijalanka
 git clone https://github.com/yogawan/jawiraiv3.1.1.git
 ```
 
-```bash
-cd jawirai
-```
-
 ### 2️⃣ Buat API Key Groq Cloud
 - Buka [Groq Cloud Console](https://console.groq.com/keys)
 - Login / daftar akun
