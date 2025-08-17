@@ -73,7 +73,7 @@ const ChatAI: React.FC = () => {
   return (
     <div className="bg-[url('/assets/red.png')] bg-cover bg-center flex justify-center pt-32">
       <Head>
-        <title>JawirAI</title>
+        <title>GeekTakon</title>
       </Head>
 
       <div className="w-full sm:w-[720px]">
