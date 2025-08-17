@@ -9,7 +9,7 @@ const ChatHeader = () => (
       alt="logo"
       className="h-16 mb-3"
     />
-    <p className="text-3xl font-thin text-white">ꦗꦮꦶꦫꦆꦌ (JawirAI)</p>
+    <p className="text-3xl font-thin text-white">ꦒꦺꦺꦏ꧀ꦠꦏꦺꦴꦤ꧀ (GeekTakon)</p>
     <p className="text-xl font-thin text-white/50"><u><a href="https://github.com/yogawan/jawiraiv1.6.3">Open Source</a></u> <i className="text-white">User Interface</i> to interact with AI Model</p>
   </div>
 );
