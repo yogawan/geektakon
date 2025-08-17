@@ -5,7 +5,7 @@ import ChatHeader from "@/components/ChatHeader";
 import ChatForm from "@/components/ChatForm";
 import ChatHistory from "@/components/ChatHistory";
 import ChatFloating from "@/components/ChatFloating";
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 import Head from "next/head";
 
 interface Message {
@@ -71,14 +71,14 @@ const ChatAI: React.FC = () => {
   const handleClearHistory = (): void => setChatHistory([]);
 
   return (
-    <div className="bg-[url('/assets/red.png')] bg-cover bg-center flex justify-center pt-32">
+    <div className="bg-[url('/background/bg-white.png')] bg-cover bg-center flex justify-center pt-20">
       <Head>
         <title>GeekTakon</title>
       </Head>
 
       <div className="w-full sm:w-[720px]">
         <div className="flex flex-col min-h-screen">
-          <Navbar />
+          {/* <Navbar /> */}
 
           {!hasHistory ? (
             <>
