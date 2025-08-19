@@ -8,9 +8,9 @@ Screenshot Mobile:
 
 ![Mobile](/public/readme/screenshot_mobile.png)
 
-# JawirAI
+# GeekTakon
 
-**Jawirai** adalah chatbot berbasis **Next.js** yang memanfaatkan **Groq Cloud API** untuk memberikan respons AI yang cepat dan efisien.  
+**GeekTakon** adalah chatbot berbasis **Next.js** yang memanfaatkan **Groq Cloud API** untuk memberikan respons AI yang cepat dan efisien.  
 Setup-nya sederhana, cukup beberapa langkah dan chatbot ini sudah bisa dijalankan di lokal Anda.
 
 ---
