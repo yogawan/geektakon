@@ -4,7 +4,7 @@ Screenshot Desktop:
 
 ![Desktop](/public/readme/screenshot_desktop.png)
 
-Screenshor Mobile:
+Screenshot Mobile:
 
 ![Mobile](/public/readme/screenshot_mobile.png)
 
