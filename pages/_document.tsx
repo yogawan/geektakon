@@ -1,12 +1,30 @@
+// import { Html, Head, Main, NextScript } from "next/document";
+
+// export default function Document() {
+//   return (
+//     <Html lang="en">
+//       <Head>
+//         <link rel="icon" href="/favicon/icon.svg" />
+//       </Head>
+//       <body className="antialiased">
+//         <Main />
+//         <NextScript />
+//       </body>
+//     </Html>
+//   );
+// }
+
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="icon" href="/favicon/icon.svg" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2E427D" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </Head>
-      <body className="antialiased">
+      <body>
         <Main />
         <NextScript />
       </body>
