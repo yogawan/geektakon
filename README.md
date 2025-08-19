@@ -1,4 +1,10 @@
-![Creator](creator.png)
+![Logo](/public/readme/logo.png)
+
+Screenshot Desktop:
+![Desktop](/public/readme/screenshot_desktop.png)
+
+Screenshor Mobile:
+![Mobile](/public/readme/screenshot_mobile.png)
 
 # JawirAI
 
