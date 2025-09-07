@@ -7,7 +7,6 @@ import ChatHistory from "@/components/ChatHistory";
 import ChatFloating from "@/components/ChatFloating";
 import Splash from "@/components/Splash";
 import Head from "next/head";
-import FAB from "@/components/FAB";
 
 interface Message {
   role: "user" | "assistant";
@@ -86,7 +85,6 @@ const ChatAI: React.FC = () => {
         <Splash />
       ) : (
         <div>
-          <FAB text="Support this project" icon="mdi:coffee" />
 
           <Head>
             <title>GeekTakon</title>

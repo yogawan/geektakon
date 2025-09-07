@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProtectedImage from "@/components/ProtectedImage";
 import axios from "axios";
+import FAB from "@/components/FAB";
 
 interface Contributor {
   login: string;
@@ -16,7 +17,7 @@ const ChatHeader = () => {
     const fetchContributors = async () => {
       try {
         const res = await axios.get<Contributor[]>(
-          "https://api.github.com/repos/yogawan/geektakon/contributors"
+          "https://api.github.com/repos/yogawan/jawiraiv3.1.2/contributors"
         );
         setContributors(res.data);
       } catch (error) {
@@ -29,6 +30,8 @@ const ChatHeader = () => {
 
   return (
     <div className="pl-5 pr-5 pb-5 bg-none">
+      <FAB text="Support this project" icon="mdi:coffee" />
+
       <ProtectedImage src="/logo.svg" alt="logo" className="h-32 mb-3" />
 
       <div className="flex items-center gap-2">
