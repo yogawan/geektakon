@@ -16,7 +16,7 @@ const ChatHeader = () => {
     const fetchContributors = async () => {
       try {
         const res = await axios.get<Contributor[]>(
-          "https://api.github.com/repos/yogawan/jawiraiv3.1.1/contributors"
+          "https://api.github.com/repos/yogawan/geektakon/contributors"
         );
         setContributors(res.data);
       } catch (error) {
@@ -34,7 +34,7 @@ const ChatHeader = () => {
       <div className="flex items-center gap-2">
         <p className="text-3xl font-thin text-white">GeekTakon</p>
         <p className="text-xs px-3 py-1 border border-white/15 w-fit rounded-full">
-          100x more <u>smart</u> than JawirAI
+          Rawrrrrrrr
         </p>
       </div>
 

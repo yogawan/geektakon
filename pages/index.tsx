@@ -5,8 +5,9 @@ import ChatHeader from "@/components/ChatHeader";
 import ChatForm from "@/components/ChatForm";
 import ChatHistory from "@/components/ChatHistory";
 import ChatFloating from "@/components/ChatFloating";
-// import Navbar from "@/components/Navbar";
+import Splash from "@/components/Splash";
 import Head from "next/head";
+import FAB from "@/components/FAB";
 
 interface Message {
   role: "user" | "assistant";
@@ -18,6 +19,15 @@ const ChatAI: React.FC = () => {
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasHistory, setHasHistory] = useState<boolean>(false);
+  const [isSplashLoading, setIsSplashLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsSplashLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
 
   useEffect(() => {
     try {
@@ -72,40 +82,50 @@ const ChatAI: React.FC = () => {
 
   return (
     <div className="bg-[url('/background/bg-white.png')] bg-cover bg-center flex justify-center pt-20">
-      <Head>
-        <title>GeekTakon</title>
-      </Head>
+      {isSplashLoading ? (
+        <Splash />
+      ) : (
+        <div>
+          <FAB text="Support this project" icon="mdi:coffee" />
 
-      <div className="w-full sm:w-[720px]">
-        <div className="flex flex-col min-h-screen">
-          {/* <Navbar /> */}
+          <Head>
+            <title>GeekTakon</title>
+          </Head>
 
-          {!hasHistory ? (
-            <>
-              <ChatHeader />
-              <ChatForm
-                input={input}
-                setInput={setInput}
-                handleSend={handleSend}
+          <div className="w-full sm:w-[720px]">
+            <div className="flex flex-col min-h-screen">
+              {/* <Navbar /> */}
+
+              {!hasHistory ? (
+                <>
+                  <ChatHeader />
+                  <ChatForm
+                    input={input}
+                    setInput={setInput}
+                    handleSend={handleSend}
+                    isLoading={isLoading}
+                  />
+                </>
+              ) : (
+                <ChatFloating
+                  input={input}
+                  setInput={setInput}
+                  handleSend={handleSend}
+                  isLoading={isLoading}
+                />
+              )}
+
+              <ChatHistory
+                chatHistory={chatHistory}
                 isLoading={isLoading}
+                handleClearHistory={handleClearHistory}
               />
-            </>
-          ) : (
-            <ChatFloating
-              input={input}
-              setInput={setInput}
-              handleSend={handleSend}
-              isLoading={isLoading}
-            />
-          )}
-
-          <ChatHistory
-            chatHistory={chatHistory}
-            isLoading={isLoading}
-            handleClearHistory={handleClearHistory}
-          />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
+    
+
     </div>
   );
 };
