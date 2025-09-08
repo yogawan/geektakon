@@ -82,8 +82,8 @@ const ChatHeader = () => {
         </div>
         <p className="mt-1 text-xs px-3 py-1 border border-white/15 w-fit rounded-full">
           {contributors.length}+ contributors
-        </p>*/}
-      </div>
+        </p>
+      </div>*/}
     </div>
   );
 };
