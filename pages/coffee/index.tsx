@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Icon } from "@iconify/react";
 import FAB from "@/components/FAB";
 import ProtectedImage from "@/components/ProtectedImage";
+import Head from "next/head";
+import { useEffect } from "react";
 
 const wallets = [
   {
@@ -60,6 +62,26 @@ const wallets = [
 const CoffeePage = () => {
   const [selected, setSelected] = useState(wallets[0]);
   const [copied, setCopied] = useState(false);
+  const [connecting, setConnecting] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setConnecting(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleWalletChange = (e) => {
+    const wallet = wallets.find((w) => w.symbol === e.target.value);
+    if (wallet && wallet.symbol !== selected.symbol) {
+      setConnecting(true);
+      setTimeout(() => {
+        setSelected(wallet);
+        setConnecting(false);
+      }, 500);
+    }
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(selected.address);
@@ -69,6 +91,10 @@ const CoffeePage = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[url('/background/bg-white.png')] px-4 sm:px-6 lg:px-8">
+      <Head>
+        <title>GeekTakon</title>
+      </Head>
+
       <FAB text="Back" icon="mdi:arrow-left" route="/" />
 
       <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl">
@@ -76,31 +102,23 @@ const CoffeePage = () => {
           <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mb-3" />
         </div>
         <div>
-          {/*<div className="backdrop-blur-sm bg-black/10 rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10">*/}
           <div className="text-center mb-8">
-            {/*<div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 backdrop-blur-sm mb-4">
-              <span className="text-3xl sm:text-4xl">☕</span>
-            </div>*/}
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#EEEEEE] mb-2">
-              Coffee to support this project ☕
+              Support this project ☕
             </h1>
             <p className="text-[#BBBBBB] text-sm sm:text-base">
               Choose your preferred cryptocurrency
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-2">
             <div className="relative">
               <select
                 id="wallet"
                 value={selected.symbol}
-                onChange={(e) => {
-                  const wallet = wallets.find(
-                    (w) => w.symbol === e.target.value,
-                  );
-                  if (wallet) setSelected(wallet);
-                }}
-                className="w-full bg-white/5 backdrop-blur-sm text-[#EEEEEE] p-4 sm:p-5 rounded-2xl border border-white/15 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-300 appearance-none cursor-pointer text-sm sm:text-base"
+                onChange={handleWalletChange}
+                disabled={connecting}
+                className="w-full bg-white/5 backdrop-blur-sm text-[#EEEEEE] p-4 sm:p-5 rounded-2xl border border-white/15 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-300 appearance-none cursor-pointer text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {wallets.map((w) => (
                   <option
@@ -118,7 +136,37 @@ const CoffeePage = () => {
               />
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-7 rounded-2xl border border-white/15 transition-all duration-300 hover:bg-white/10">
+            {/* Connecting Animation Overlay */}
+            {connecting && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-2xl">
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/15 text-center">
+                  <div className="flex justify-center mb-4">
+                    <Icon
+                      icon="mdi:loading"
+                      className="text-4xl text-[#EEEEEE] animate-spin"
+                    />
+                  </div>
+                  <p className="text-[#EEEEEE] font-medium mb-2">
+                    Connecting to wallet...
+                  </p>
+                  <div className="flex justify-center space-x-1">
+                    <div className="w-2 h-2 bg-[#EEEEEE] rounded-full animate-pulse"></div>
+                    <div
+                      className="w-2 h-2 bg-[#EEEEEE] rounded-full animate-pulse"
+                      style={{ animationDelay: "0.2s" }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-[#EEEEEE] rounded-full animate-pulse"
+                      style={{ animationDelay: "0.4s" }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div
+              className={`bg-white/5 backdrop-blur-sm p-6 sm:p-7 rounded-2xl border border-white/15 transition-all duration-300 hover:bg-white/10 relative ${connecting ? "opacity-50" : ""}`}
+            >
               <div className="flex items-start gap-4 mb-6">
                 <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
                   <Icon
@@ -148,7 +196,8 @@ const CoffeePage = () => {
                   </div>
                   <button
                     onClick={handleCopy}
-                    className="flex-shrink-0 w-12 h-12 rounded-xl transition-all duration-300 bg-[#EEEEEE] text-[#171717] hover:bg-white hover:scale-105 active:scale-95 flex items-center justify-center shadow-lg"
+                    disabled={connecting}
+                    className="flex-shrink-0 w-12 h-12 rounded-xl transition-all duration-300 bg-[#EEEEEE] text-[#171717] hover:bg-white hover:scale-105 active:scale-95 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
                     <Icon
                       icon={copied ? "mdi:check" : "mdi:content-copy"}
