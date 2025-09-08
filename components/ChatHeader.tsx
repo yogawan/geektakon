@@ -1,43 +1,43 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ProtectedImage from "@/components/ProtectedImage";
-// import axios from "axios";
+import axios from "axios";
 import FAB from "@/components/FAB";
 
-// interface Contributor {
-//   login: string;
-//   avatar_url: string;
-//   html_url: string;
-// }
+interface Contributor {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
 
 const ChatHeader = () => {
-  // const [contributors, setContributors] = useState<Contributor[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
 
-  // useEffect(() => {
-  //   const fetchContributors = async () => {
-  //     try {
-  //       const res = await axios.get<Contributor[]>(
-  //         "https://api.github.com/repos/yogawan/geektakon/contributors",
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-  //           },
-  //         },
-  //       );
-  //       setContributors(res.data);
-  //     } catch (error) {
-  //       console.error("Failed to fetch contributors:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchContributors = async () => {
+      try {
+        const res = await axios.get<Contributor[]>(
+          "https://api.github.com/repos/yogawan/geektakon/contributors",
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+            },
+          },
+        );
+        setContributors(res.data);
+      } catch (error) {
+        console.error("Failed to fetch contributors:", error);
+      }
+    };
 
-  //   fetchContributors();
-  // }, []);
+    fetchContributors();
+  }, []);
 
   return (
     <div className="pl-5 pr-5 pb-5 bg-none">
       <FAB text="Support this project" icon="mdi:coffee" />
 
-      <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mb-3" />
+      <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mt-24 mb-3" />
 
       <div className="flex items-end gap-2">
         <p className="text-3xl font-thin text-white">GeekTakon</p>
@@ -61,7 +61,7 @@ const ChatHeader = () => {
         to interact with LLM Models.
       </p>
 
-      {/*<div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <div className="mt-3">
           <div className="flex flex-wrap">
             {contributors.map((contributor) => (
@@ -83,7 +83,7 @@ const ChatHeader = () => {
         <p className="mt-1 text-xs px-3 py-1 border border-white/15 w-fit rounded-full">
           {contributors.length}+ contributors
         </p>
-      </div>*/}
+      </div>
     </div>
   );
 };
