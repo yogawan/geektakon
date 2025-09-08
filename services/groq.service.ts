@@ -1,43 +1,49 @@
 // utils/groq.ts
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
 interface ApiMessage {
-  role: 'system' | 'user' | 'assistant';
+  role: "system" | "user" | "assistant";
   content: string;
 }
 
 interface GroqResponse {
-  reply: string;
+  reply?: string;
+  error?: string;
 }
 
-const SYSTEM_PROMPT = process.env.NEXT_PUBLIC_SYSTEM_PROMPT as string;
-const URL_API = process.env.NEXT_PUBLIC_URL_API as string;
+const SYSTEM_PROMPT = process.env.NEXT_PUBLIC_SYSTEM_PROMPT || "";
+const URL_API = process.env.NEXT_PUBLIC_URL_API || "";
 
-/**
- * Sends a request to Groq AI with message history
- * @param history - Array of message objects
- * @returns Promise that resolves to AI response string
- */
 export const requestToGroqAI = async (history: Message[]): Promise<string> => {
+  if (!URL_API) throw new Error("NEXT_PUBLIC_URL_API is not defined");
+  if (!SYSTEM_PROMPT) console.warn("⚠️ SYSTEM_PROMPT is empty");
+
   const messages: ApiMessage[] = [
-    { role: 'system', content: SYSTEM_PROMPT },
-    ...history.map(msg => ({ ...msg, role: msg.role as 'user' | 'assistant' })),
+    { role: "system", content: SYSTEM_PROMPT },
+    ...history,
   ];
 
   const res = await fetch(URL_API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ messages }),
   });
 
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(`Network response was not ok: ${res.status} - ${errorText}`);
+  let data: GroqResponse;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error(`Invalid JSON response from server (${res.status})`);
   }
-  
-  const data: GroqResponse = await res.json();
-  return data.reply;
+
+  if (!res.ok) {
+    throw new Error(
+      data.error || `Network error: ${res.status} ${res.statusText}`,
+    );
+  }
+
+  return data.reply ?? "";
 };

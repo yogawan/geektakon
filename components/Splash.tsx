@@ -11,7 +11,7 @@ const Splash = () => {
         <img
           src="./splash.svg"
           alt="Logo"
-          className="w-[128px] pointer-events-none"
+          className="w-[256px] pointer-events-none"
           draggable="false"
         />
         <div className="absolute inset-0 bg-transparent"></div>

@@ -1,9 +1,9 @@
 // pages/api/chat/models/groq.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-import { Groq } from 'groq-sdk';
+import { NextApiRequest, NextApiResponse } from "next";
+import { Groq } from "groq-sdk";
 
 interface Message {
-  role: 'system' | 'user' | 'assistant';
+  role: "system" | "user" | "assistant";
   content: string;
 }
 
@@ -21,29 +21,37 @@ const groq = new Groq({
 });
 
 export default async function handler(
-  req: NextApiRequest, 
-  res: NextApiResponse<ResponseData>
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>,
 ) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    return res.status(405).end('Method Not Allowed');
+  if (req.method !== "POST") {
+    return res
+      .setHeader("Allow", ["POST"])
+      .status(405)
+      .json({ error: "Method Not Allowed" });
+  }
+
+  const { messages } = req.body as RequestBody;
+
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: "Messages array is required" });
   }
 
   try {
-    const { messages }: RequestBody = req.body;
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({ error: 'Messages array is required' });
-    }
-
-    const reply = await groq.chat.completions.create({
-      model: 'llama3-8b-8192',
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages,
     });
 
-    const responseMessage: any = reply.choices[0].message.content;
-    return res.status(200).json({ reply: responseMessage });
-  } catch (err) {
-    console.error('Groq API error:', err);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    const reply = completion.choices?.[0]?.message?.content ?? null;
+
+    return res.status(200).json({ reply: reply || "" });
+  } catch (err: any) {
+    console.error("Groq API error:", err.response?.data || err.message || err);
+
+    return res.status(500).json({
+      error:
+        err.response?.data?.error?.message || err.message || "Unknown error",
+    });
   }
 }

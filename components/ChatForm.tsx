@@ -9,8 +9,15 @@ interface ChatFormProps {
   isLoading: boolean;
 }
 
-const ChatForm: React.FC<ChatFormProps> = ({ input, setInput, handleSend, isLoading }) => {
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+const ChatForm: React.FC<ChatFormProps> = ({
+  input,
+  setInput,
+  handleSend,
+  isLoading,
+}) => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (!isLoading) handleSend();
@@ -28,15 +35,29 @@ const ChatForm: React.FC<ChatFormProps> = ({ input, setInput, handleSend, isLoad
         disabled={isLoading}
       />
 
-      <div className="flex justify-end items-center p-3 rounded-3xl">
+      <div className="flex justify-between items-center border-t border-white/15 p-3 rounded-3xl">
+        <p className="text-xs text-white/50">
+          ꦠꦏꦺꦴꦁ ꦲꦶꦁꦏꦁ ꦱꦤ꧀ꦠꦸꦤ꧀, Jangan tanya hal2 jomok le, NGUAWORRRR, TAK DUPAK
+          RAIMU SISAN!!!!!
+        </p>
         <button
           onClick={handleSend}
           className={`p-5 w-[64px] font-semibold rounded-full transition ${
-            isLoading ? "bg-white/5 text-white cursor-not-allowed" : "bg-white/5 text-white"
+            isLoading
+              ? "bg-white/5 text-white cursor-not-allowed"
+              : "bg-white/5 text-white"
           }`}
           disabled={isLoading}
         >
-          <Icon icon={isLoading ? "line-md:loading-twotone-loop" : "line-md:arrow-small-right"} width="24" height="24" />
+          <Icon
+            icon={
+              isLoading
+                ? "line-md:loading-twotone-loop"
+                : "line-md:arrow-small-right"
+            }
+            width="24"
+            height="24"
+          />
         </button>
       </div>
     </div>
