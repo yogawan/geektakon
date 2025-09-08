@@ -72,7 +72,7 @@ const CoffeePage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleWalletChange = (e) => {
+  const handleWalletChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const wallet = wallets.find((w) => w.symbol === e.target.value);
     if (wallet && wallet.symbol !== selected.symbol) {
       setConnecting(true);
