@@ -9,7 +9,7 @@ const Splash = () => {
         style={{ userSelect: "none" }}
       >
         <img
-          src="./splash.svg"
+          src="./favicon/icon.svg"
           alt="Logo"
           className="w-[256px] pointer-events-none"
           draggable="false"
