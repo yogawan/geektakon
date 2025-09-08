@@ -6,7 +6,6 @@ interface Message {
   role: "user" | "assistant";
   content: string;
 }
-
 interface ChatHistoryProps {
   chatHistory: Message[];
   isLoading: boolean;

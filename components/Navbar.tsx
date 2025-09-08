@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
     const fetchContributors = async () => {
       try {
         const res = await axios.get<Contributor[]>(
-          "https://api.github.com/repos/yogawan/jawiraiv3.1.1/contributors"
+          "https://api.github.com/repos/yogawan/jawiraiv3.1.1/contributors",
         );
         setContributors(res.data);
       } catch (error) {
@@ -91,7 +91,10 @@ const Navbar: React.FC = () => {
         <ul className="space-y-[-12px] text-start">
           <p className="text-3xl text-white m-3">Contributors</p>
           {contributors.map((contributor) => (
-            <li key={contributor.login} className="flex items-center m-3 space-x-4">
+            <li
+              key={contributor.login}
+              className="flex items-center m-3 space-x-4"
+            >
               <img
                 src={contributor.avatar_url}
                 alt={contributor.login}

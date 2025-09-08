@@ -9,8 +9,15 @@ interface ChatFloatingProps {
   isLoading: boolean;
 }
 
-const ChatFloating: React.FC<ChatFloatingProps> = ({ input, setInput, handleSend, isLoading }) => {
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+const ChatFloating: React.FC<ChatFloatingProps> = ({
+  input,
+  setInput,
+  handleSend,
+  isLoading,
+}) => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (!isLoading) handleSend();
@@ -32,11 +39,21 @@ const ChatFloating: React.FC<ChatFloatingProps> = ({ input, setInput, handleSend
         <button
           onClick={handleSend}
           className={`p-5 w-[64px] font-semibold rounded-full transition ${
-            isLoading ? "bg-white/5 text-white cursor-not-allowed" : "bg-white/5 text-white"
+            isLoading
+              ? "bg-white/5 text-white cursor-not-allowed"
+              : "bg-white/5 text-white"
           }`}
           disabled={isLoading}
         >
-          <Icon icon={isLoading ? "line-md:loading-twotone-loop" : "line-md:arrow-small-right"} width="24" height="24" />
+          <Icon
+            icon={
+              isLoading
+                ? "line-md:loading-twotone-loop"
+                : "line-md:arrow-small-right"
+            }
+            width="24"
+            height="24"
+          />
         </button>
       </div>
     </div>

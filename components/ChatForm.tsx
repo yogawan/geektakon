@@ -8,7 +8,6 @@ interface ChatFormProps {
   handleSend: () => void;
   isLoading: boolean;
 }
-
 const ChatForm: React.FC<ChatFormProps> = ({
   input,
   setInput,

@@ -7,7 +7,11 @@ interface FABProps {
   route?: string;
 }
 
-const FAB = ({ text = "Support this project", icon = "mdi:coffee", route = "/coffee"}: FABProps) => {
+const FAB = ({
+  text = "Support this project",
+  icon = "mdi:coffee",
+  route = "/coffee",
+}: FABProps) => {
   return (
     <div className="fixed top-5 right-5">
       <Link
