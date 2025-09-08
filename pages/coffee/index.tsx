@@ -91,16 +91,16 @@ const CoffeePage = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[url('/background/bg-white.png')] px-4 sm:px-6 lg:px-8">
+      {/* Title Page */}
       <Head>
         <title>GeekTakon</title>
       </Head>
 
+      {/* Floating Action Button */}
       <FAB text="Back" icon="mdi:arrow-left" route="/" />
 
       <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl">
-        <div className="flex justify-center">
-          <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mb-3" />
-        </div>
+        {/* Wallet Detail */}
         <div>
           <div className="text-center mb-8">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#EEEEEE] mb-2">
@@ -118,7 +118,7 @@ const CoffeePage = () => {
                 value={selected.symbol}
                 onChange={handleWalletChange}
                 disabled={connecting}
-                className="w-full bg-white/5 backdrop-blur-sm text-[#EEEEEE] p-4 sm:p-5 rounded-2xl border border-white/15 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-300 appearance-none cursor-pointer text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-white/5 backdrop-blur-sm text-[#EEEEEE] p-4 sm:p-5 rounded-full border border-white/15 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-300 appearance-none cursor-pointer text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {wallets.map((w) => (
                   <option
@@ -165,7 +165,7 @@ const CoffeePage = () => {
             )}
 
             <div
-              className={`bg-white/5 backdrop-blur-sm p-6 sm:p-7 rounded-2xl border border-white/15 transition-all duration-300 hover:bg-white/10 relative ${connecting ? "opacity-50" : ""}`}
+              className={`bg-white/5 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-white/15 transition-all duration-300 hover:bg-white/10 relative ${connecting ? "opacity-50" : ""}`}
             >
               <div className="flex items-start gap-4 mb-6">
                 <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
@@ -223,6 +223,11 @@ const CoffeePage = () => {
               Your support helps keep this project running
             </p>
           </div>
+        </div>
+
+        {/* Bird Logo */}
+        <div className="flex justify-center">
+          <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mt-5" />
         </div>
       </div>
     </div>

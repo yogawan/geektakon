@@ -27,7 +27,6 @@ const ChatAI: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-
   useEffect(() => {
     try {
       const saved = localStorage.getItem("chatHistory");
@@ -67,7 +66,7 @@ const ChatAI: React.FC = () => {
       const aiMsg: Message = { role: "assistant", content: aiReply };
       setChatHistory((prev) => [...prev, aiMsg]);
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
       setChatHistory((prev) => [
         ...prev,
         { role: "assistant", content: "Sorry, an error occurred." },
@@ -85,15 +84,15 @@ const ChatAI: React.FC = () => {
         <Splash />
       ) : (
         <div>
-
+          {/* Title Page */}
           <Head>
             <title>GeekTakon</title>
           </Head>
 
+          {/* Chat AI Container */}
           <div className="w-full sm:w-[720px]">
             <div className="flex flex-col min-h-screen">
-              {/* <Navbar /> */}
-
+              {" "}
               {!hasHistory ? (
                 <>
                   <ChatHeader />
@@ -112,7 +111,6 @@ const ChatAI: React.FC = () => {
                   isLoading={isLoading}
                 />
               )}
-
               <ChatHistory
                 chatHistory={chatHistory}
                 isLoading={isLoading}
@@ -122,8 +120,6 @@ const ChatAI: React.FC = () => {
           </div>
         </div>
       )}
-    
-
     </div>
   );
 };

@@ -23,7 +23,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content }) => {
     // Basic syntax highlighting patterns
     const patterns = {
       // Keywords
-      keywords: /\b(function|const|let|var|if|else|for|while|return|class|import|export|from|default|async|await|try|catch|finally|throw|new|this|super|extends|implements|interface|type|enum|public|private|protected|static|readonly)\b/g,
+      keywords:
+        /\b(function|const|let|var|if|else|for|while|return|class|import|export|from|default|async|await|try|catch|finally|throw|new|this|super|extends|implements|interface|type|enum|public|private|protected|static|readonly)\b/g,
       // Strings
       strings: /(["'`])(?:(?!\1)[^\\]|\\.)*/g,
       // Comments
@@ -37,11 +38,26 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content }) => {
     let highlightedCode = code;
 
     // Apply highlighting
-    highlightedCode = highlightedCode.replace(patterns.comments, '<span style="color: #6A9955;">$1</span>');
-    highlightedCode = highlightedCode.replace(patterns.strings, '<span style="color: #CE9178;">$1</span>');
-    highlightedCode = highlightedCode.replace(patterns.keywords, '<span style="color: #569CD6;">$1</span>');
-    highlightedCode = highlightedCode.replace(patterns.numbers, '<span style="color: #B5CEA8;">$1</span>');
-    highlightedCode = highlightedCode.replace(patterns.functions, '<span style="color: #DCDCAA;">$1</span>');
+    highlightedCode = highlightedCode.replace(
+      patterns.comments,
+      '<span style="color: #6A9955;">$1</span>',
+    );
+    highlightedCode = highlightedCode.replace(
+      patterns.strings,
+      '<span style="color: #CE9178;">$1</span>',
+    );
+    highlightedCode = highlightedCode.replace(
+      patterns.keywords,
+      '<span style="color: #569CD6;">$1</span>',
+    );
+    highlightedCode = highlightedCode.replace(
+      patterns.numbers,
+      '<span style="color: #B5CEA8;">$1</span>',
+    );
+    highlightedCode = highlightedCode.replace(
+      patterns.functions,
+      '<span style="color: #DCDCAA;">$1</span>',
+    );
 
     return highlightedCode;
   };
@@ -60,7 +76,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content }) => {
               className="relative border border-white/15 text-white rounded-xl mb-5 p-4 bg-[#1e1e1e] overflow-x-auto"
             >
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] text-white/50 uppercase">{language}</span>
+                <span className="text-[10px] text-white/50 uppercase">
+                  {language}
+                </span>
                 <button
                   onClick={() => handleCopyCode(code, index)}
                   className="border border-white/15 text-white text-[10px] px-2 py-1 rounded hover:bg-gray-600 transition"
@@ -72,7 +90,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ content }) => {
               <pre className="text-[0.75rem] text-white overflow-x-auto">
                 <code
                   dangerouslySetInnerHTML={{
-                    __html: highlightCode(code, language)
+                    __html: highlightCode(code, language),
                   }}
                 />
               </pre>
@@ -92,7 +110,10 @@ const FormattedText: React.FC<FormattedTextProps> = ({ text }) => {
       {text.split("\n").map((line, index) => {
         line = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
         line = line.replace(/\*(.*?)\*/g, "<em>$1</em>");
-        line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">$1</a>');
+        line = line.replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">$1</a>',
+        );
 
         if (/^\s*-\s/.test(line)) {
           return (
@@ -102,7 +123,13 @@ const FormattedText: React.FC<FormattedTextProps> = ({ text }) => {
           );
         }
 
-        return <p key={index} dangerouslySetInnerHTML={{ __html: line }} className="mb-2"></p>;
+        return (
+          <p
+            key={index}
+            dangerouslySetInnerHTML={{ __html: line }}
+            className="mb-2"
+          ></p>
+        );
       })}
     </div>
   );
