@@ -1,3 +1,5 @@
+![Screenshot](https://res.cloudinary.com/dy4hqxkv1/image/upload/v1763320977/Screenshot_from_2025-11-17_02-21-59_yfrusu.png)
+
 # GeekTakon
 
 **GeekTakon** adalah chatbot berbasis **Next.js** yang memanfaatkan **Groq Cloud API** untuk memberikan respons AI yang cepat dan efisien.  
