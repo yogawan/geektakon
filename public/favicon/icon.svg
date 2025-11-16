@@ -1,8 +1,21 @@
-<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="696.397" y="535.603" width="240" height="720" transform="rotate(136 696.397 535.603)" fill="#EEEEEE"/>
-<rect y="480" width="240" height="720" transform="rotate(-90 0 480)" fill="white"/>
-<rect y="480" width="240" height="240" transform="rotate(-90 0 480)" fill="#EEEEEE"/>
-<rect x="480" y="720" width="240" height="720" transform="rotate(-180 480 720)" fill="white"/>
-<rect x="480" y="720" width="240" height="240" transform="rotate(-180 480 720)" fill="#EEEEEE"/>
-<rect width="240" height="526.851" transform="matrix(0.71934 0.694658 0.694658 -0.71934 24.0003 535.924)" fill="white"/>
+<svg width="760" height="760" viewBox="0 0 760 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_576_110)">
+<rect x="200" y="200" width="360" height="360" rx="180" fill="#EEEEEE"/>
+</g>
+<g filter="url(#filter1_f_576_110)">
+<rect x="290" y="290" width="180" height="180" rx="90" fill="#171717"/>
+</g>
+<g clip-path="url(#paint0_angular_576_110_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0 0.256 -0.256 0 380 380)"><foreignObject x="-1003.91" y="-1003.91" width="2007.81" height="2007.81"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(238, 238, 238, 1) 0deg,rgba(23, 23, 23, 1) 360deg);height:100%;width:100%;opacity:0.25"></div></foreignObject></g></g><rect x="124" y="124" width="512" height="512" rx="256" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.93333333730697632,&#34;g&#34;:0.93333333730697632,&#34;b&#34;:0.93333333730697632,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.090196080505847931,&#34;g&#34;:0.090196080505847931,&#34;b&#34;:0.090196080505847931,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.93333333730697632,&#34;g&#34;:0.93333333730697632,&#34;b&#34;:0.93333333730697632,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.090196080505847931,&#34;g&#34;:0.090196080505847931,&#34;b&#34;:0.090196080505847931,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:3.1350959426180297e-14,&#34;m01&#34;:-512.0,&#34;m02&#34;:636.0,&#34;m10&#34;:512.0,&#34;m11&#34;:3.1350959426180297e-14,&#34;m12&#34;:124.0},&#34;opacity&#34;:0.250,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"/>
+<defs>
+<filter id="filter0_f_576_110" x="0" y="0" width="760" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_576_110"/>
+</filter>
+<filter id="filter1_f_576_110" x="162" y="162" width="436" height="436" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="64" result="effect1_foregroundBlur_576_110"/>
+</filter>
+<clipPath id="paint0_angular_576_110_clip_path"><rect x="124" y="124" width="512" height="512" rx="256"/></clipPath></defs>
 </svg>
