@@ -59,7 +59,7 @@ const wallets = [
   },
 ];
 
-const CoffeePage = () => {
+const CoffeeSupport = () => {
   const [selected, setSelected] = useState(wallets[0]);
   const [copied, setCopied] = useState(false);
   const [connecting, setConnecting] = useState(true);
@@ -234,4 +234,4 @@ const CoffeePage = () => {
   );
 };
 
-export default CoffeePage;
+export default CoffeeSupport;

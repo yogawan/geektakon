@@ -1,13 +1,3 @@
-![Logo](/public/readme/logo.png)
-
-Screenshot Desktop:
-
-![Desktop](/public/readme/screenshot_desktop.png)
-
-Screenshot Mobile:
-
-![Mobile](/public/readme/screenshot_mobile.png)
-
 # GeekTakon
 
 **GeekTakon** adalah chatbot berbasis **Next.js** yang memanfaatkan **Groq Cloud API** untuk memberikan respons AI yang cepat dan efisien.  
@@ -19,7 +9,7 @@ Setup-nya sederhana, cukup beberapa langkah dan chatbot ini sudah bisa dijalanka
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/yogawan/jawiraiv3.1.1.git
+git clone https://github.com/yogawan/geektakon.git
 ```
 
 ### 2️⃣ Buat API Key Groq Cloud

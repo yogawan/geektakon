@@ -35,9 +35,9 @@ const ChatHeader = () => {
 
   return (
     <div className="pl-5 pr-5 pb-5 bg-none">
-      <FAB text="Support this project" icon="mdi:coffee" />
+      {/* <FAB text="Support this project" icon="mdi:coffee" /> */}
 
-      <ProtectedImage src="/logo.svg" alt="logo" className="h-24 mt-24 mb-3" />
+      <ProtectedImage src="/favicon/icon.svg" alt="logo" className="h-44 mt-12 mb-3" />
 
       <div className="flex items-end gap-2">
         <p className="text-3xl font-thin text-white">GeekTakon</p>
